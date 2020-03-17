@@ -1,0 +1,828 @@
+1.	Write a program for the following: a. Matrix transpose b. Matrix multiplication.
+A. Matrix Transpose
+Program:
+import java.util.Scanner;
+
+public class Matrix {
+	//Declaring Variables
+	int rowsOfmatrix1;
+	int coloumnsOfMatrix1;
+	int rowsOfMatrix2;
+	int coloumnsOfMatrix2;
+	int rows;
+	int coloumns;
+
+	public void transpose() {
+		Scanner in = new Scanner(System.in); // Scanner class
+		System.out.println("Transpose Matrix");  // Taking inputs from the console
+		System.out.println("enter number of rows of matrix");
+		rows = in.nextInt();
+		System.out.println("enter number of columns of  matrix");
+		coloumns = in.nextInt();
+		System.out.println("enter values for matrix");
+		int array[][] = new int[rows][coloumns];  // Original array
+		int[][] temparray = new int[coloumns][rows];  // temporary array to store elements
+		for (int outer = 0; outer < rows; outer++) {  
+			for (int inner = 0; inner < coloumns; inner++) {
+				array[outer][inner] = in.nextInt();
+			}
+		}
+		if (rows == coloumns) {
+			System.out.println("Transpose of a matrix is:");
+			// calculating transpose of matrix
+			for (int outer = 0; outer < coloumns; outer++) {   //copying the array elements to temp
+				for (int inner = 0; inner < coloumns; inner++) {
+					int temprory = array[outer][inner];
+					temparray[inner][outer] = temprory;
+				}
+			}
+		}
+		if (rows > coloumns || rows < coloumns) {
+			System.out.println("Transpose of a matrix is:");
+			int ref1 = 0;
+			// calculating transpose of matrix
+			for (int outer = 0; outer < rows; outer++) {
+				if (ref1 != 0) {
+					ref1++;
+				}
+				for (int inner = 0; inner < coloumns; inner++) {  // for transpose of the matrix 
+					int temporary = array[outer][inner];
+					temparray[ref1][outer] = temporary;
+					++ref1;
+					if (ref1 == coloumns) {
+						ref1 = 0;
+					}
+
+				}
+			}
+		}
+		for (int[] element : temparray) {  // printing output array
+			for (int index : element) {
+				System.out.print(" " + index);
+			}
+			System.out.println();
+		}
+		in.close();  //scanner close
+	}
+
+	public static void main(String[] args) {
+		Matrix matrix = new Matrix(); // creating object
+		matrix.transpose(); // calling method
+
+	}
+}
+
+
+
+Output:
+ 
+B. Matric Multiplication
+Program:
+import java.util.Scanner;
+public class MultiplicationOfMatrix {
+	// declaring variables
+	int rowsOfmatrix1;
+	int coloumnsOfMatrix1;
+	int rowsOfMatrix2;
+	int coloumnsOfMatrix2;
+	// Multiplication method
+	public void multiplication() {
+		Scanner in = new Scanner(System.in);  // Scanner class
+		System.out.println("Multiplication of two matrices");  // Taking details of the matrix
+		System.out.println("enter number of rows of first matrix");
+		rowsOfmatrix1 = in.nextInt();
+		System.out.println("enter number of columns of first matrix");
+		coloumnsOfMatrix1 = in.nextInt();
+		System.out.println("enter number of rows of second matrix");
+		rowsOfMatrix2 = in.nextInt();
+		System.out.println("enter number of columns of second matrix");
+		coloumnsOfMatrix2 = in.nextInt();
+		if (coloumnsOfMatrix1 == rowsOfMatrix2) {  // if the condition is true then the only if condition executes
+
+			int array1[][] = new int[rowsOfmatrix1][coloumnsOfMatrix1];
+			int array2[][] = new int[rowsOfMatrix2][coloumnsOfMatrix2];
+			int result[][] = new int[rowsOfmatrix1][coloumnsOfMatrix2];
+			int sum = 0;
+			System.out.println("Enter values for A matrix");  // taking values for the one matrix
+			for (int outer = 0; outer < rowsOfmatrix1; outer++) {
+				for (int inner = 0; inner < coloumnsOfMatrix1; inner++) {
+					array1[outer][inner] = in.nextInt();
+				}
+			}
+			System.out.println("Enter values for B matrix");  // taking values for the second matrix
+			for (int outer = 0; outer < rowsOfMatrix2; outer++) {
+				for (int inner = 0; inner < coloumnsOfMatrix2; inner++) {
+					array2[outer][inner] = in.nextInt();
+				}
+			}
+			System.out.println("Multiplication of a matrix A and B:");  // multiplying matrices
+			for (int outer = 0; outer < rowsOfmatrix1; outer++) {
+				// calculating multiplication of matrices
+				for (int inner = 0; inner < coloumnsOfMatrix2; inner++) {
+					for (int deeper = 0; deeper < rowsOfMatrix2; deeper++) {
+						sum = sum + (array1[inner][deeper] * array2[deeper][inner]);
+					}
+					result[outer][inner] = sum;
+				}
+			}
+			for (int outer = 0; outer < rowsOfmatrix1; outer++) {  // printing output matrix
+				for (int inner = 0; inner < coloumnsOfMatrix2; inner++) {
+					System.out.print(result[outer][inner] + " ");
+				}
+				System.out.println();
+			}
+		} else {
+			System.out.println("matrix multiplication is not possible");
+		}
+		in.close();  // scanner close
+	}
+
+	public static void main(String[] args) {
+		MultiplicationOfMatrix matrix = new MultiplicationOfMatrix();  // object creation
+		matrix.multiplication();  // method calling
+
+	}
+
+}
+
+Output:
+ 
+
+
+
+
+
+2.	Given following are the marks scored in different subjects by 5 scholars.
+76 78 
+68 87 69 
+84 
+84 58 68 72 71 
+64 81 59 62 
+Write a java program to print sum and average of the marks scored by the scholars. 
+Note: Store the scholar names in a one dimensional array of strings.
+ {"Raj","Rishi","Pooja","Pranshu","Prateek"}
+Program:
+import java.util.*;
+
+public class Scholars {
+	public static void main(String[] args) {
+		Scanner in = new Scanner(System.in);
+		String[] names = new String[5];   //  Initializing arrays for names of the scholar
+		int[][] mark = new int[5][]; // initializing marks array
+
+		System.out.println("Enter the names of the Scholars :");
+
+		for (int i = 0; i < 5; i++)   // Takes names of the scholar
+		{
+			names[i] = in.nextLine();
+		}
+
+		System.out.println("Enter the marks of scholar :"); 
+		// Takes marks of the Scholars
+
+		mark[0] = new int[2];
+
+		mark[1] = new int[3];
+
+		mark[2] = new int[1];
+
+		mark[3] = new int[5];
+
+		mark[4] = new int[4];
+
+		for (int i = 0; i < mark.length; i++) {  // Takes marks of the scholars
+			for (int j = 0; j < mark[i].length; j++) {
+				mark[i][j] = in.nextInt();
+			}
+		}
+		for (int i = 0; i < mark.length; i++) {  // for calculating sum and average
+
+			int sum = 0, avg = 0;
+
+			for (int j = 0; j < mark[i].length; j++) {
+
+				sum = sum + mark[i][j]; // Sum calculation
+
+				avg = sum / mark[i].length; // Average calculation
+
+			}
+
+			System.out.println("Sum of "+ names[i] +"'S marks is : " + sum);
+
+			System.out.println("Average of "+names[i] + "'S marks is : " + avg);
+
+		}
+		in.close();
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+Output:
+ 
+
+
+
+
+
+
+
+
+
+
+
+3.	Consider the following rules for the evaluation of a physical fitnes for a post where only men can apply. 
+Age 			Weight in pounds 			Height in inches 
+Below 20 		Not Eligible 				Not Eligible 
+20 to 30 		155 to 175 				5'2" to 5'5" 
+30 to 40 		170 to 180 				5'4" to 5'6" 
+40 to 50 		175 to 185 				5'6" to 6'0" 
+Above 50 		Not Eligible 				Not Eligible 
+Propmt the user for name, gender, age and weight with units. (Units for weight could be in Kgs or pounds and height could be in cms or inches). If the user enters pounds and inches, check it aganist the table given and disply their eligibility result. If the value is provided in cms and kgs, then convert and display their eligibility result. if the candidate is female, then display result as "Only male candidates are allowed." 
+Hint : 1 Kg = 2.2 Pounds 1 inch = 2.54 cms
+Program:
+import java.util.*;
+public class PhysicalFitness {
+
+	public static void main(String[] args) {
+		Scanner in = new Scanner(System.in);
+		System.out.println("Enter Name:");
+		String name = in.next();
+		System.out.println("Enter Gender:");
+		String gender= in.next();
+		if (gender.equalsIgnoreCase("male")) // checking gender is male or not
+		{
+			System.out.println("Enter age:");
+			int age = in.nextInt();
+			if (age < 20) // checking age condition and enters if age is greater than 20
+			{
+				System.out.println("Not Eligible ");
+			}
+			else if (age >= 20 && age <= 30) { // Condition executes if the age in between 20 and 30 
+				System.out.println("Enter weight of the candidate in pounds or kgs");
+				float wt = in.nextFloat();
+				if (wt > 100) {
+					wt = (float) (wt / 2.2);//  conversion from kgs to pounds
+				}
+				if (70.4545 <= wt && wt <= 79.5454) {  // checking condition and executes if the weight is in between the given condition
+					System.out.println("Enter height of candidate cms");
+					float ht = in.nextFloat();
+					if (ht < 10) {
+						ht = ht * 2.54f;
+					}
+					if (13.207 <= ht && ht <= 13.969) {  // checking condition and executes if the height is in between the given condition and display the result
+						System.out.println("Name   : " + name);
+						System.out.println("Gender : " + gender);
+						System.out.println("Weight : " + wt + " (in kgs)");
+						System.out.println("Hieght : " + ht + " (in cms)");
+						System.out.println(name + " is eligible");
+					} else {
+						System.out.println("Not Eligible");
+					}
+				} else {
+					System.out.println("Not Eligible");
+				}
+			}
+
+			else if (age > 30 && age <= 40) {   // checking age condition
+				System.out.println("Enter weight of the candidate");
+				float wt = in.nextFloat();
+
+				if (wt > 100) {
+					wt = (float) (wt / 2.2);
+				}
+				if (77.2727 <= wt && wt <= 81.8181) {  // checking weight condition
+					System.out.println("Enter height of the candidate");
+					float ht = in.nextFloat();
+
+					if (ht < 10) {
+						ht = ht * 2.54f;
+					}
+					if (13.716 <= ht && ht <= 14.224) {  // checking height condition and display the result
+						System.out.println("Name   : " + name);
+						System.out.println("Gender : " + gender);
+						System.out.println("Weight : " + wt);
+						System.out.println("Hieght : " + ht);
+						System.out.println(name + " is eligible");
+					} else {
+						System.out.println("Not Eligible");
+					}
+				} else {
+					System.out.println("Not Eligible");
+				}
+			} else if (40 < age && age <= 50) {   // Checking age condition 
+				System.out.println("Enter weight of the candidate");
+				float wt = in.nextFloat();
+
+				if (wt > 100) {
+					wt = (float) (wt / 2.2);
+				}
+				if (79.5454 <= wt && wt <= 84.0909) {  // checking weight condition
+					System.out.println("Enter height of candidate");
+					float ht = in.nextFloat();
+
+					if (ht < 10) {
+						ht = ht * 2.54f;
+					}
+					if (14.224 <= ht && ht <= 15.24) {   // checking height condition and display the result
+						System.out.println("Name   : " + name);
+						System.out.println("Gender : " + gender);
+						System.out.println("Weight : " + wt);
+						System.out.println("Hieght : " + ht);
+						System.out.println(name + " is eligible");
+					} else {
+						System.out.println("Not Eligible");
+					}
+				} else {
+					System.out.println("Not Eligible");
+				}
+			} else {
+				System.out.println("Not Eligible");
+			}
+		} else {
+			System.out.println("Only male candidates are allowed");
+		}
+		in.close();
+	}
+}
+
+Output1:
+
+Output2:
+
+
+
+4.Write a java program for the following: 
+a. Array insertion
+Program:
+import java.util.Scanner;
+public class ArrayInsertion {
+	public static void main(String[] args) {
+		Scanner in= new Scanner(System.in);// getting inputs from user
+		System.out.print("Enter no. of elements you want in array:");
+		int size = in.nextInt();  // takes size of the array 
+		int arr[] = new int[size + 1];  // Initializing size of the array
+		System.out.println("Enter array elements:");
+		for (int i = 0; i < size; i++) {  // taking elements to the array
+			arr[i] = in.nextInt();
+		}
+		System.out.print("Enter the position to insert:");
+		int position = in.nextInt();  // taking position to insert the element
+		System.out.print("Enter the element you want to insert:");
+		int num = in.nextInt();  // taking element to insert in given position
+		for (int i = (size - 1); i >= (position - 1); i--)// inserting the given value at specified position
+		{
+			arr[i + 1] = arr[i];
+		}
+		arr[position - 1] = num;  // inserting element in give position
+		System.out.print("Array after insertion:");// displaying the result
+		for (int i: arr) {  // printing output after insertion
+			System.out.print(i+" ");
+		}
+		in.close();
+	}
+}
+
+
+
+
+
+
+
+Output 4a:
+ 
+b. Array deletion
+Program:
+import java.util.Scanner;
+
+public class ArrayDeletion
+{
+	public static void main(String args[])
+	{
+		// initialize the objects.
+		int size, del, count=0;
+		Scanner in = new Scanner(System.in);
+		// enter array size.
+		System.out.print("Enter Array Size : ");
+		size = in.nextInt();
+		int[] arr = new int[size];
+		int[] arr2=new int[size-1];
+		// enter elements.
+		System.out.println("Enter Array Elements : ");
+		for(int i=0; i<size; i++)
+		{
+			arr[i] = in.nextInt();
+		}
+
+		// enter elements which is to be deleted.
+		System.out.print("Enter Element to be Delete : ");
+		del = in.nextInt();
+		for(int i=0; i<size; i++)
+		{
+			if(arr[i] == del)
+			{
+				for(int j=i; j<(size-1); j++)
+				{
+					arr[j] = arr[j+1];
+				}
+				count++;
+				break;
+			}
+		}
+		if(count==0)
+		{
+			// print if entered element not found.
+			System.out.print("Element Not Found..!!");
+		}
+		else
+		{
+			// element deleted.
+			System.out.print("Element Deleted Successfully..!!");
+			for(int j=0; j<(size-1); j++)  // copying array elements to another array 
+			{
+				arr2[j] =arr[j];
+			}
+
+			// new array after deletion.
+			System.out.print("\nNow the New Array is :\n");
+			for(int j:arr2)
+			{
+				System.out.print(j+ " ");
+			}
+		}
+		in.close();
+	}
+}
+
+
+Output 4b:
+ 
+
+
+
+
+
+5.Write a java program to implement Bank-SB-Account Class with a constructor to initilize acct_no, customer_name, trans_type, trans_amount,bal_amount data members.Create member functions to update the balance amount based on the type of transaction(deposit, withdrawal) and show the customer information with the new balance amount.
+Program:
+import java.util.*;
+public class Bank {
+	public static void main(String[] args) {
+		long acct_no;   // Declaring variables
+		String customer_name;
+		String trans_type;
+		double trans_amount;
+		double bal_amount;
+		Scanner in = new Scanner(System.in); // scanner class
+		System.out.println("Enter Customer Name:");  // Taking inputs from console
+		customer_name = in.next();
+		System.out.println("Enter Account Number:");
+		acct_no = in.nextLong();
+		System.out.println("Enter Transtion Type:");
+		trans_type = in.next();
+		System.out.println("Enter Trans Amount:");
+		trans_amount = in.nextLong();
+		System.out.println("Enter Balance:");
+		bal_amount = in.nextDouble();
+		Banking b = new Banking(acct_no, customer_name, trans_type, trans_amount, bal_amount);  // calling constructor in banking class 
+		b.transaction(); // calling method
+		in.close();  //closing Scanner class 
+	}
+
+}
+
+class Banking {
+	private long acct_no;
+	static String customer_name;
+	String trans_type;
+	private double trans_amount, bal_amount;
+	public Banking(long acct_no, String customer_name, String trans_type, double trans_amount, double bal_amount) {
+		super();
+		this.acct_no = acct_no;  // Assign inputs to the variable using super keyword
+		Banking.customer_name = customer_name;
+		this.trans_type = trans_type;
+		this.trans_amount = trans_amount;
+		this.bal_amount = bal_amount;
+	}
+	public void transaction() {
+		double amount = 0;
+		if (trans_type.equalsIgnoreCase("withdrawal")) { // checking for withdrawal or not
+			if (trans_amount <= bal_amount) {
+				amount = bal_amount - trans_amount;
+
+			} else {
+				System.out.println("invaid transaction");
+			}
+		}
+		if (trans_type.equalsIgnoreCase("deposit")) { // checking for deposit or not
+			amount = bal_amount + trans_amount;
+
+		}
+		System.out.println("Customer Name :" + customer_name);// displaying the results
+		System.out.println("Account Number :" + acct_no);
+		System.out.println("Transtion Type :" + trans_type);
+		System.out.println("Trans Amount :" + trans_amount);
+		System.out.println("old Balance :" + bal_amount);
+		System.out.println("New Balance :" + amount);
+	}
+}
+
+Output:
+ 
+6. Write a java program to input electricity unit charges and calculate total electricity bill according to the given condition: 
+For first 50 units Rs. 0.50/unit 
+For next 100 units Rs. 0.75/unit 
+For next 100 units Rs. 1.20/unit 
+For unit above 250 Rs. 1.50/unit 
+An additional surcharge of 20% is added to the bill. 
+-Use class, object, constructor and finalize method to implement the above program. 
+-Use a static variable to store the state name. -Assume the class members on your own.
+Program:
+import java.util.*;
+public class Electricity {
+	public static void main(String[] args) {
+		Scanner in=new Scanner(System.in);  // Scanner class
+		System.out.println("Enter Customer ID: ");   // Taking inputs from console
+		long customer_id = in.nextLong();
+		System.out.println("Enter Customer Name: ");
+		String customer_name = in.next();
+		System.out.println("Nubmer of Units spent: ");
+		int units_spent = in.nextInt();
+		ElectricityBill e = new ElectricityBill(customer_id, customer_name, units_spent);   // calling electricity bill constructor in electricity bill class
+		System.out.println("ID    : " + e.getCustomer_id());  // Printing details
+		System.out.println("Name  : " + e.getCustomer_name());  
+		System.out.println("Units spent :" + e.getUnits_spent());
+		@SuppressWarnings("static-access")
+		double amount = e.billAmount(e.getUnits_spent());   
+		e.subcharge(amount);
+		in.close();  // Scanner close
+	}
+}
+
+class ElectricityBill {
+	private long customer_id;  // declaring private variables
+	private String customer_name;
+	private int units_spent;
+
+	public ElectricityBill() {// constructor creating
+		super();
+	}
+	public ElectricityBill(long customer_id, String customer_name, int units_spent) {
+		super();
+		this.customer_id = customer_id;  //Assigning inputs 
+		this.customer_name = customer_name;
+		this.units_spent = units_spent;
+	}
+	// Getter setter methods
+	public long getCustomer_id() {
+		return customer_id;
+	}
+	public void setCustomer_id(long customer_id) {
+		this.customer_id = customer_id;
+	}
+	public String getCustomer_name() {
+		return customer_name;
+	}
+	public void setCustomer_name(String customer_name) {
+		this.customer_name = customer_name;
+	}
+	public int getUnits_spent() {
+		return units_spent;
+	}
+	public void setUnits_spent(int units_spent) {
+		this.units_spent = units_spent;
+	}
+	public static double billAmount(int units_spent) // creating method to calculating bill amount
+	{
+		double pay_amount;
+		// Checking conditions
+		if (units_spent <= 50) {
+			pay_amount = units_spent * 0.50;
+		} else if (50 < units_spent && units_spent <= 150) {
+			pay_amount = units_spent * 0.75;
+		} else if (150 < units_spent && units_spent <= 250) {
+			pay_amount = units_spent * 1.20;
+		} else {
+			pay_amount = units_spent * 1.50;
+		}
+		return pay_amount;
+	}
+	public <finalize> finalize subcharge(double pay_amount) {
+		System.out.println("Bill Amount :" + (pay_amount + (0.2 * pay_amount)));
+		return null;
+	}
+}
+
+Output:
+ 
+
+
+
+
+
+
+
+
+7. Create a class to overload the following method to find out the area of different shapes: 
+Method name: area() 
+Shapes: 
+a. Triangle 
+b. Rectangle 
+c. Square 
+Also use the concept of var-args to implement the above.
+Program:
+public class AreaOfShape {
+	void Area(float base, float height) {// area for the triangle
+		float area = 0.0f;
+		area = 0.5f * base * height;
+		System.out.println("Area of triangle:" + area);  // printing area for triangle
+	}
+
+	void Area(double height, float width) {// area for the rectangle
+		double area = 0.0d;
+		area = height * width;
+		System.out.println("Area of rectangle:" + area); //printing area for rectangle
+	}
+
+	void Area(float side) {// area for the square
+		float area = 0.0f;
+		area = side * side;
+		System.out.println("Area of square:" + area);  //printing area for square 
+	}
+	static void Area(float height, float[] base) {  // area for the triangle using VAR-arg
+		float area = 0.0f;
+		area = 0.5f * base[0] * height;
+		System.out.println("Area of triangle var:" + area);  // printing area for triangle 
+	}
+
+	static void Area(float height, double[] width) {  // Area for the rectangle using VAR-arg
+		double area = 0.0d;
+		area = height * width[0];
+		System.out.println("Area of rectangle var:" + area);// printing area for triangle
+	}
+	static void Area(float[] side) {  // Area for the square using VAR-arg
+		float area = 0.0f;
+		area = side[0] * side[0];
+		System.out.println("Area of square var:" + area);  // Printing area of the square
+	}
+
+	public static void main(String[] args) {
+		AreaOfShape aos = new AreaOfShape();// creating object
+		//passing values to the methods
+		aos.Area(12.0f, 13.0f);
+		aos.Area(15.0d, 14.0f);
+		aos.Area(12.0f);
+		System.out.println("Using Var args");
+		aos.Area(12.0f, 13.0f);
+		aos.Area(15.0d, 14.0f);
+		aos.Area(12.0f);
+	}
+}
+Output:
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+8.
+Statement:
+
+  	 p.name=(“Prateek”);
+
+
+9.
+Program:
+	  public static int m1(int x)
+ {
+		return ++x;
+	}
+	public static void main (String[] args) 
+	{    	
+		int x = 1;
+		int y = m1(x);
+		System.out.println("x=" + y + ", y=" + x);
+	}
+
+
+10. A class 'Student' have private attributes regno, name & mark. Add methods to read values from user and print student data. Read and print information for multiple objects.
+Program:
+import java.util.*;
+public class Student1{
+	public static void main(String[] args) {
+		Student stu = new Student();  // Creating object
+		stu.add();  // calling method
+	}
+}
+class Student {
+	// declaring variables
+	int reg_number;
+	String Name;
+	double Mark;
+	// constructor 
+	public Student(int reg_no, String name, double mark) {
+		super();
+		// assiging inputs
+		this.reg_number = reg_no;
+		this.Name = name;
+		this.Mark = mark;
+	}
+
+	Student() {
+	}
+
+	public void add() {
+		System.out.println("Enter the number of students");
+		Scanner in = new Scanner(System.in);  // Scanner class
+		// Declaring variables
+		int reg_no;
+		String name;
+		double mark;
+		int num = in.nextInt();
+		Student[] stu = new Student[num];  // array creation
+		for (int i = 1; i <=num; i++) {  // taking student details from console
+			System.out.println("Enter the Registration number "+i);
+			reg_no = in.nextInt();
+			System.out.println("Enter the Student number "+i);
+			name = in.next();
+			System.out.println("Enter the Mark ");
+			mark = in.nextDouble();
+			Student s = new Student(reg_no, name, mark);
+			stu[i-1] = s;
+		}
+		for (Student st : stu) {  // printing output
+			System.out.println(st.toString());
+		}
+		in.close();  // closing scanner class
+	}
+
+	@Override
+	public String toString() {  // to string method
+		return "Student [Reg_no=" + reg_number + ", Name=" + Name + ", Mark=" + Mark + "]";
+
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+Output:
+ 
+
+
+
+11. Create a class 'Point' with variables x and y. Add a static method which takes two point objects as arguments and find the distance between two points.
+Program:
+public class Point {
+	int x;
+	int y;
+	Point(int xCoord, int yCoord)
+	{
+		this.x = xCoord;
+		this.y = yCoord;
+	}
+	public int getX()
+	{
+		return x;
+	}
+	public int getY()
+	{
+		return y;
+	}
+	public static int distance(Point a, Point b)
+	{
+		int dx = a.x - b.x;
+		int dy = a.y - b.y;
+		return (int) Math.sqrt(dx * dx + dy * dy);
+	}
+	public static void main(String[] args)
+	{
+		Point p1 = new Point(-1,1);
+		Point p2 = new Point(3,4);
+		System.out.println("Distance between two points: "+ Point.distance(p1, p2));
+	}
+}
+Output:
+ 
